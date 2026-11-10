@@ -1,0 +1,5 @@
+# Modules supplied by the Kit 110.4 pip archive used by this application.
+# Install only into a compatible Kit Python 3.12 environment if absent.
+numpy==2.3.1
+Pillow==12.3.0
+websockets==12.0

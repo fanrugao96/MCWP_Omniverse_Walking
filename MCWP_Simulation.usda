@@ -1,0 +1,3170 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (50000, 0, 0)
+                double radius = 500
+            }
+            dictionary Perspective = {
+                double3 position = (6489.121279666156, 6459.121312250254, 6659.571072855534)
+                double3 target = (30, 0.000032584100154053885, 200.44994735717773)
+            }
+            dictionary Right = {
+                double3 position = (0, -50000, 0)
+                double radius = 500
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 50000)
+                double radius = 500
+            }
+            string boundCamera = "/Simulation/Camera"
+        }
+        dictionary renderSettings = {
+        }
+    }
+    endTimeCode = 599
+    metersPerUnit = 0.01
+    startTimeCode = 0
+    subLayers = [
+        @./assets/ue_export/MCWP_Omniverse_Demo.usda@
+    ]
+    timeCodesPerSecond = 30
+    upAxis = "Z"
+)
+
+def "Render" (
+    hide_in_stage_window = true
+    no_delete = true
+)
+{
+    def "OmniverseKit"
+    {
+        def "HydraTextures" (
+            hide_in_stage_window = true
+            no_delete = true
+        )
+        {
+            def RenderProduct "omni_kit_widget_viewport_ViewportTexture_0" (
+                prepend apiSchemas = ["OmniRtxSettingsCommonAdvancedAPI_1", "OmniRtxSettingsRtAdvancedAPI_1", "OmniRtxSettingsPtAdvancedAPI_1", "OmniRtxSettingsParticleFieldAPI_1", "OmniRtxPostColorGradingAPI_1", "OmniRtxPostChromaticAberrationAPI_1", "OmniRtxPostBloomPhysicalAPI_1", "OmniRtxPostMatteObjectAPI_1", "OmniRtxPostCompositingAPI_1", "OmniRtxPostDofAPI_1", "OmniRtxPostMotionBlurAPI_1", "OmniRtxPostTvNoiseAPI_1", "OmniRtxPostTonemapIrayReinhardAPI_1", "OmniRtxPostDebugSettingsAPI_1", "OmniRtxDebugSettingsAPI_1"]
+                hide_in_stage_window = true
+                no_delete = true
+            )
+            {
+                rel camera = </Simulation/Camera>
+                token omni:rtx:directLighting:sampledLighting:denoisingTechnique = "None"
+                bool omni:rtx:dlss:frameGeneration = 1
+                token omni:rtx:rendermode = "RealTimePathTracing"
+                color3f omni:rtx:rt:ambientLight:color = (0.1, 0.1, 0.1)
+                bool omni:rtx:rt:demoire = 0
+                bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
+                rel orderedVars = </Render/Vars/LdrColor>
+                custom bool overrideClipRange = 0
+                uniform int2 resolution = (1920, 1080)
+            }
+        }
+    }
+
+    def RenderSettings "OmniverseGlobalRenderSettings" (
+        prepend apiSchemas = ["OmniRtxSettingsGlobalRtAdvancedAPI_1", "OmniRtxSettingsGlobalPtAdvancedAPI_1"]
+        no_delete = true
+    )
+    {
+        rel products = </Render/OmniverseKit/HydraTextures/omni_kit_widget_viewport_ViewportTexture_0>
+    }
+
+    def "Vars" (
+        hide_in_stage_window = true
+        no_delete = true
+    )
+    {
+        def RenderVar "LdrColor" (
+            hide_in_stage_window = true
+            no_delete = true
+        )
+        {
+            uniform string sourceName = "LdrColor"
+            uniform token sourceType = "raw"
+        }
+    }
+}
+
+over "Root"
+{
+    over Xform "MCWP_Platform" (
+        references = @./assets/lift/Platform_Lift.usda@
+    )
+    {
+        over "Carriage" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+        )
+        {
+            custom double mcwp:maximumHeightCm = 160
+            custom double mcwp:minimumHeightCm = 0
+            custom string mcwp:mode = "kinematic demonstration; uncalibrated actuator"
+            bool physics:kinematicEnabled = 1
+            double3 xformOp:translate = (0, 0, 31.66666666666537)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def "Payloads"
+            {
+                def SkelRoot "Worker" (
+                    customData = {
+                        string controller = "MCWP planted-foot procedural humanoid; source mesh, skin and 23-joint rig retained"
+                    }
+                    references = @./assets/worker/Construction_Worker_Rigged.usdc@
+                )
+                {
+                    float xformOp:rotateZ = 118
+                    float3 xformOp:scale = (100, 100, 100)
+                    double3 xformOp:translate = (0.9890182973321331, -4.0406620018351935e-15, 0.35)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+
+                    def SkelAnimation "ControlPose"
+                    {
+                        uniform token[] joints = ["Root", "Root/Hips", "Root/Hips/Spine", "Root/Hips/Spine/Chest", "Root/Hips/Spine/Chest/UpperChest", "Root/Hips/Spine/Chest/UpperChest/Neck", "Root/Hips/Spine/Chest/UpperChest/Neck/Head", "Root/Hips/Spine/Chest/UpperChest/Shoulder_L", "Root/Hips/Spine/Chest/UpperChest/Shoulder_L/UpperArm_L", "Root/Hips/Spine/Chest/UpperChest/Shoulder_L/UpperArm_L/Forearm_L", "Root/Hips/Spine/Chest/UpperChest/Shoulder_L/UpperArm_L/Forearm_L/Hand_L", "Root/Hips/Spine/Chest/UpperChest/Shoulder_R", "Root/Hips/Spine/Chest/UpperChest/Shoulder_R/UpperArm_R", "Root/Hips/Spine/Chest/UpperChest/Shoulder_R/UpperArm_R/Forearm_R", "Root/Hips/Spine/Chest/UpperChest/Shoulder_R/UpperArm_R/Forearm_R/Hand_R", "Root/Hips/Thigh_L", "Root/Hips/Thigh_L/Calf_L", "Root/Hips/Thigh_L/Calf_L/Foot_L", "Root/Hips/Thigh_L/Calf_L/Foot_L/Toe_L", "Root/Hips/Thigh_R", "Root/Hips/Thigh_R/Calf_R", "Root/Hips/Thigh_R/Calf_R/Foot_R", "Root/Hips/Thigh_R/Calf_R/Foot_R/Toe_R"]
+                        quatf[] rotations = [(0.70710677, 0.70710677, 0, 0), (0.99997705, -0.0067705307, 1.0128173e-8, 1.0128167e-8), (0.9998738, -0.015884697, 2.3238417e-8, 2.323128e-8), (0.9999064, -0.0136794, 1.9454191e-8, 1.9422167e-8), (0.9984805, 0.055106603, -3.2425174e-8, -2.882981e-8), (0.99155027, 0.1297229, -3.0506012e-8, -2.373366e-8), (0.9889366, -0.1483388, 5.197313e-9, 5.1973132e-9), (-0.38124996, 0.6206995, 0.49346936, 0.47525632), (0.7999955, -0.4959436, -0.21589401, 0.25968632), (0.993626, -0.09041565, 0.06102573, -0.028429123), (0.9931715, -0.013174844, -0.090871975, 0.07196566), (-0.3812491, 0.620699, -0.49347004, -0.475257), (0.79999536, -0.49594313, 0.21589448, -0.25968716), (0.99362606, -0.090415575, -0.061025288, 0.028429221), (0.9931712, -0.013175308, 0.09087422, -0.07196714), (0.05892042, 0.9976118, 0.022131715, 0.02844677), (0.9812992, 0.19042116, -0.017006401, 0.022415183), (0.8332322, -0.47348744, 0.05242009, -0.28068823), (0.30782744, -1.0614734e-8, 0.89369994, -0.32640868), (0.061773635, 0.9974134, -0.023196194, -0.028504156), (0.9810908, 0.19148988, 0.016845116, -0.02255562), (0.83214384, -0.47644028, -0.067990996, 0.27553308), (-0.30782464, 4.845488e-9, 0.8937012, -0.326408)]
+                        half3[] scales = [(1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1), (1, 1, 1)]
+                        float3[] translations = [(0, 0, 0), (-3.1715676e-23, 0.87002736, -2.6672659e-10), (1.4168565e-17, 0.11838437, 1.509993e-10), (2.459564e-16, 0.15076639, -3.1860703e-10), (-1.2200039e-15, 0.15077366, -2.2947224e-9), (1.3471181e-15, 0.19662158, 2.5910335e-10), (-2.7451255e-16, 0.068178855, -3.479257e-10), (0.071679786, 0.13579074, -0.008973767), (-2.046594e-9, 0.13886721, -7.732584e-9), (-6.2667826e-9, 0.28131923, -6.8667916e-9), (2.1436342e-9, 0.2666707, 5.966762e-9), (-0.071679786, 0.13579087, -0.008973557), (-1.4898882e-9, 0.13886717, 4.2324757e-9), (-8.145497e-9, 0.28131923, 8.573707e-9), (-2.5301798e-9, 0.2666706, -2.8695444e-9), (0.08698258, 5.909152e-8, -9.094283e-8), (2.5887066e-9, 0.3927771, -2.6956373e-10), (1.3345293e-9, 0.3904678, 2.476883e-10), (-2.3330005e-9, 0.16734517, -3.721834e-9), (-0.08698258, 5.9091974e-8, 1.6749918e-7), (-1.5695343e-9, 0.3927772, -5.5847005e-10), (-2.4304647e-10, 0.39046746, -9.1840086e-10), (-9.696269e-10, 0.16734506, -2.6261864e-9)]
+                    }
+
+                    over "Skeleton" (
+                        prepend apiSchemas = ["SkelBindingAPI"]
+                    )
+                    {
+                        rel skel:animationSource = </Root/MCWP_Platform/Carriage/Payloads/Worker/ControlPose>
+                    }
+
+                    over "Geometry"
+                    {
+                        float3[] extent = [(-0.29796794, -0.20760484, 0.002), (0.29542065, 0.15953405, 1.798)]
+                    }
+                }
+            }
+
+            over "Control_Button" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Control_Button_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Control_Head_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Control_Head_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Control_Post_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Control_Post_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_00" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_03" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_04" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_05" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_06" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_07" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Crossmember_08" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Edge_Y_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Edge_Y_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_End_X_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_End_X_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_01_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_01_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_01_03" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_02_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_02_03" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_03_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_03_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_03_03" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_04_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_04_03" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_05_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_05_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Panel_05_03" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_01" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_05" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_06" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_07" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_08" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_09" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_10" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_11" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_12" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_13" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_14" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_15" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_18" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Seam_19" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Deck_Surface_Traction_Ribs" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Enclosure_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Enclosure_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_1_0" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_1_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_1_3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_1_4" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_1_5" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_2_0" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_2_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_2_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_2_3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_2_4" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Drive_Vent_2_5" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Emergency_Stop" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Emergency_Stop_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Bar_m1_0_55" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Bar_m1_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Bar_1_0_55" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Bar_1_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Post_m1_m1_0218" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Post_m1_1_0218" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Post_1_m1_0218" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Rail_Post_1_1_0218" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Toeboard_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "End_Toeboard_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Engine_Access_Top_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Engine_Access_Top_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Gate_m1_Neutral_Badge" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Gate_1_Neutral_Badge" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Gate_Handle" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Gate_Handle_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Guardrail_Socket" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Guardrail_Socket_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Guardrail_Socket_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Guardrail_Socket_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Hatch_Bolt" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Hatch_Bolt_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Hatch_Bolt_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Hatch_Bolt_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Lower_Chord_Y_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Lower_Chord_Y_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Lower_End_X_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Lower_End_X_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Front_Access_Hatch" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Guide_Collar_X" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Guide_Collar_X_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Guide_Collar_Y" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Guide_Collar_Y_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Guide_Roller" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Guide_Roller_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Hatch_Hinge" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Hatch_Hinge_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Front_Access_Hatch" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Guide_Collar_X" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Guide_Collar_X_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Guide_Collar_Y" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Guide_Collar_Y_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Guide_Roller" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Guide_Roller_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Hatch_Hinge" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Hatch_Hinge_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Guide_Vertical_m1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Guide_Vertical_m1_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Guide_Vertical_m1_3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Guide_Vertical_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Guide_Vertical_1_2" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Guide_Vertical_1_3" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Rail_Socket" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Rail_Socket_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Rail_Socket_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Rail_Socket_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Bar_m1_0_61" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Bar_m1_0_88" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Bar_m1_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Bar_1_0_61" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Bar_1_0_88" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Bar_1_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Post_m1_m1_524" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Post_m1_m3_6226" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Post_1_1_524" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Support_Post_1_3_6226" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Toeboard_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Rear_Toeboard_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_m1_Bar_0_6" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_m1_Bar_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_m1_Toeboard" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_m1_Upper_Sign" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_m1_Upright" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_m1_Upright_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_1_Bar_0_6" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_1_Bar_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_1_Toeboard" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_1_Upper_Sign" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_1_Upright" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_1_Upright_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_Divider" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_Divider_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_Divider_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Gate_Divider_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Guide_Shoe" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Guide_Shoe_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Guide_Shoe_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Sliding_Guide_Shoe_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_00_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_00_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_01_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_01_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_02_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_02_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_03_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_03_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_04_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_04_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_05_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_05_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_06_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_06_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_07_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Diagonal_07_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_00_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_00_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_01_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_01_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_02_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_02_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_03_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_03_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_04_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_04_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_05_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_05_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_06_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_06_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_07_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_07_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_08_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Subframe_Post_08_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+        }
+
+        over "Fixed"
+        {
+            over "Compact_Support_m1_m0_9818" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Compact_Support_m1_0_9818" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Compact_Support_1_m0_9818" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Compact_Support_1_0_9818" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Footplate" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Footplate_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Footplate_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Footplate_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Leveling_Screw" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Leveling_Screw_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Leveling_Screw_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Leveling_Screw_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Chord_m1_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Chord_m1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Chord_1_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Chord_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_00" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_04" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_06" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_08" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_10" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_12" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_14" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Internal_Horizontal_Brace_16" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_00_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_00_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_01_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_01_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_02_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_02_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_03_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_03_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_04_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_04_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_05_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_05_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_06_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_06_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_07_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_07_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_08_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_08_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_09_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_09_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_10_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_10_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_11_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_11_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_12_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_12_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_13_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_13_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_14_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_14_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_15_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_15_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_16_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_16_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_17_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Ladder_Rung_17_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_004" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_005" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_006" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Section_Connector_007" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_00_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_00_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_01_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_01_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_02_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_02_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_03_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_03_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_04_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_04_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_05_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_05_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_06_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_06_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_07_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_07_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_08_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_08_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_09_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_09_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_10_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_10_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_11_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_11_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_12_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_12_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_13_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_13_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_14_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_14_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_15_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_15_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_16_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_16_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_17_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_1_Side_Rung_17_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Chord_m1_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Chord_m1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Chord_1_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Chord_1_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_00" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_02" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_04" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_06" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_08" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_10" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_12" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_14" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Internal_Horizontal_Brace_16" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_00_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_00_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_01_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_01_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_02_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_02_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_03_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_03_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_04_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_04_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_05_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_05_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_06_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_06_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_07_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_07_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_08_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_08_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_09_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_09_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_10_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_10_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_11_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_11_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_12_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_12_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_13_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_13_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_14_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_14_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_15_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_15_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_16_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_16_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_17_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Ladder_Rung_17_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_004" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_005" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_006" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Section_Connector_007" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_00_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_00_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_01_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_01_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_02_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_02_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_03_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_03_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_04_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_04_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_05_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_05_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_06_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_06_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_07_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_07_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_08_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_08_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_09_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_09_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_10_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_10_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_11_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_11_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_12_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_12_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_13_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_13_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_14_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_14_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_15_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_15_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_16_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_16_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_17_m1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_2_Side_Rung_17_1" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_001" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_002" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_003" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_004" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_005" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_006" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_007" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_008" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_009" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_010" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_011" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_012" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_013" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_014" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+
+            over "Mast_Connector_Bolt_015" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+            )
+            {
+                uniform token physics:approximation = "none"
+            }
+        }
+    }
+
+    over "MCWP_Worker" (
+        active = false
+    )
+    {
+    }
+
+    over "MyPawn2"
+    {
+        token visibility
+    }
+
+    over "Floor" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        uniform token physics:approximation = "none"
+    }
+}
+
+def "Simulation"
+{
+    def PhysicsScene "PhysicsScene" (
+        prepend apiSchemas = ["PhysxSceneAPI"]
+    )
+    {
+        vector3f physics:gravityDirection = (0, 0, -1)
+        float physics:gravityMagnitude = 981
+        uniform token physxScene:broadphaseType = "MBP"
+        bool physxScene:enableGPUDynamics = 0
+        uniform token physxScene:solverType = "TGS"
+    }
+
+    def DomeLight "FillLight"
+    {
+        float inputs:intensity = 1400
+    }
+
+    def Camera "Camera" (
+        apiSchemas = ["OmniRtxCameraAutoExposureAPI_1", "OmniRtxCameraExposureAPI_1"]
+    )
+    {
+        float2 clippingRange = (1, 100000)
+        float exposure:fStop = 5
+        float exposure:iso = 100
+        float exposure:responsivity = 1.1026709
+        float exposure:time = 0.02
+        float focalLength = 31.176914
+        float horizontalAperture = 36
+        bool omni:rtx:autoExposure:enabled = 0
+        bool omni:rtx:autoExposure:histogramClamping:enabled = 0
+        float verticalAperture = 20.25
+        matrix4d xformOp:transform = ( (0.999996561604223, -0.0026223614798908585, 0, 0), (0.0016144869375467822, 0.6156593584378415, 0.7880107536067218, 0), (-0.0020664490459980337, -0.7880080441138745, 0.6156614753256582, 0), (46.33616772017667, -1396.5951884982476, 1367.0231992374524, 0.9999999999999998) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Sphere "ValidationProbe" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        float physics:mass = 0.5
+        bool physxRigidBody:enableCCD = 0
+        color3f[] primvars:displayColor = [(1, 0.32, 0.02)]
+        double radius = 10
+        double3 xformOp:translate = (150, 0, 162.91666666666538)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Sphere "DesktopHandProxy"
+    {
+        color3f[] primvars:displayColor = [(0.1, 0.65, 1)]
+        double radius = 6
+        token visibility = "invisible"
+        double3 xformOp:translate = (250, 0, 300)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "RecordedUEController"
+    {
+        token visibility = "invisible"
+        matrix4d xformOp:transform
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def BasisCurves "X"
+        {
+            int[] curveVertexCounts = [2]
+            point3f[] points = [(0, 0, 0), (12, 0, 0)]
+            color3f[] primvars:displayColor = [(1, 0.1, 0.1)]
+            uniform token type = "linear"
+            float[] widths = [1.5] (
+                interpolation = "constant"
+            )
+        }
+
+        def BasisCurves "Y"
+        {
+            int[] curveVertexCounts = [2]
+            point3f[] points = [(0, 0, 0), (0, 12, 0)]
+            color3f[] primvars:displayColor = [(0.1, 1, 0.1)]
+            uniform token type = "linear"
+            float[] widths = [1.5] (
+                interpolation = "constant"
+            )
+        }
+
+        def BasisCurves "Z"
+        {
+            int[] curveVertexCounts = [2]
+            point3f[] points = [(0, 0, 0), (0, 0, 12)]
+            color3f[] primvars:displayColor = [(0.1, 0.3, 1)]
+            uniform token type = "linear"
+            float[] widths = [1.5] (
+                interpolation = "constant"
+            )
+        }
+    }
+}
+
+over "OmniverseKit_Persp" (
+    prepend apiSchemas = ["OmniRtxCameraAutoExposureAPI_1", "OmniRtxCameraExposureAPI_1"]
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float exposure:fStop = 5
+    float exposure:responsivity = 1.1026709
+    float exposure:time = 0.02
+    float focalLength = 18.147562
+    float focusDistance = 400
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -11187.526139622263)
+    float3 xformOp:rotateXYZ = (54.73561, -6.3611094e-15, 135)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (6489.121279666156, 6459.121312250254, 6659.571072855534)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+
+over "OmniverseKit_Front" (
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float horizontalAperture = 5000
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -50000)
+    token projection = "orthographic"
+    float verticalAperture = 5000
+    float3 xformOp:rotateXYZ = (90, -1.2722219e-14, 90)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (50000, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+
+over "OmniverseKit_Right" (
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float horizontalAperture = 5000
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -50000)
+    token projection = "orthographic"
+    float verticalAperture = 5000
+    float3 xformOp:rotateXYZ = (90, 7.06225e-31, -1.2722219e-14)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, -50000, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+
+over "OmniverseKit_Top" (
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float horizontalAperture = 5000
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -50000)
+    token projection = "orthographic"
+    float verticalAperture = 5000
+    float3 xformOp:rotateXYZ = (1.2722219e-14, -7.016709e-15, -90)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, 0, 50000)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+

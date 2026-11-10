@@ -1,0 +1,46 @@
+{
+  "Construction_Worker_RestPose.usdc": {
+    "bytes": 612521,
+    "sha256": "b0e6d5cff23570aa7168b41c1b87aca5d122ab847be3042d58ff7e69b32d60d7"
+  },
+  "Construction_Worker_Rigged.usdc": {
+    "bytes": 612067,
+    "sha256": "5f95b74fd41e3573b3fafa3828b8cc69aa77b43a6d34e7be2751fcbbdd97ef6b"
+  },
+  "LICENSE_Rocketbox_MIT.txt": {
+    "bytes": 1066,
+    "sha256": "17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352"
+  },
+  "Source_Provenance.json": {
+    "bytes": 3862,
+    "sha256": "86f3edca78e46acfda937f69da066a7635f0f50eb2cac44092159b6ce4339782"
+  },
+  "textures/m107_body_color.png": {
+    "bytes": 5909975,
+    "sha256": "bdf58e734450f7d4768c0035c38af2c882587e25c1cb9710872b66a5b82ce968"
+  },
+  "textures/m107_body_normal_OpenGL.png": {
+    "bytes": 4592153,
+    "sha256": "9524523bf83e094302d31545038c0e7a730dd3c6f215be43926893055bc3edff"
+  },
+  "textures/m107_head_color.png": {
+    "bytes": 4446260,
+    "sha256": "0272666e95ca6b338e9206eb4b318439a8af41d8e0047d017807d7d458c4a10a"
+  },
+  "textures/m107_head_normal_OpenGL.png": {
+    "bytes": 4261251,
+    "sha256": "8d92edb32533afa034eec73ac0c4f47f7a01f3afa5878d2eb9ff8f22d7d9f490"
+  },
+  "textures/m107_helmet_color.png": {
+    "bytes": 1111367,
+    "sha256": "d5c7c2c4cea1b5e983bc2701d819f09267913bc2728e5f84b679ed853a0d667b"
+  },
+  "textures/m107_helmet_normal_OpenGL.png": {
+    "bytes": 623843,
+    "sha256": "9d6cafd5b3a2c79fc700b854f19993cf78d0be0dd01cc56c098463a9208c7ebd"
+  },
+  "walk_navigation.json": {
+    "bytes": 80286,
+    "sha256": "6907e0badcb516e3d2971c643a01ba90ab703126e3f7b489bba1c44239587d9e"
+  }
+}

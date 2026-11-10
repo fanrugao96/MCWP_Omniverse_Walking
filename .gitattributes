@@ -1,0 +1,6 @@
+# Preserve exact bytes across checkouts so SHA-256 delivery checks remain valid.
+* -text
+*.py diff=python
+*.png binary
+*.usdc binary
+*.npy binary

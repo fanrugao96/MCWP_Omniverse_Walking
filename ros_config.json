@@ -1,0 +1,4 @@
+{
+  "url": null,
+  "note": "Set an explicit ROS1 rosbridge WebSocket URL only when a server is available. No automatic connection. Topic camera/image, sensor_msgs/Image, bgr8, 1280x720. Real ROS subscriber receipt is not yet verified."
+}

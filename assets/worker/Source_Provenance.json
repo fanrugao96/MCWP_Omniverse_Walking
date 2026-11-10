@@ -1,0 +1,67 @@
+{
+  "source": "Microsoft Rocketbox Construction_Male_07",
+  "commit": "0943055db6ec570bcef9f2c8b41c9e5467c808f9",
+  "license": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/LICENSE.md",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Export/Construction_Male_07.fbx",
+      "file": "Construction_Male_07.fbx",
+      "bytes": 566144,
+      "sha256": "2d0745bf8551fbf6bf439c3cc36da36e600cab158b4f500041355b51d3a8e876"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_body_color.tga",
+      "file": "m107_body_color.tga",
+      "bytes": 12582956,
+      "sha256": "8472cafe735a8b3f495dcd1021a92f0468ea720d7cfce86cdd85911ed1fed565"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_body_normal.tga",
+      "file": "m107_body_normal.tga",
+      "bytes": 12582956,
+      "sha256": "456a2e503575091125762374feaf55b68c7c463ae2723dc1e0697650ae6f375c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_body_specular.tga",
+      "file": "m107_body_specular.tga",
+      "bytes": 12582956,
+      "sha256": "018e16876aec7afacdf1fc8d9e90aa729a0a31a0e03d3d2cce3280428d4b64bf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_head_color.tga",
+      "file": "m107_head_color.tga",
+      "bytes": 12582956,
+      "sha256": "d143f1cfef994f440840564cc4955e5f17a1c7a40d15f9cb0f5a20f358da9075"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_head_normal.tga",
+      "file": "m107_head_normal.tga",
+      "bytes": 12582956,
+      "sha256": "d42929fb289e0463156fa0eca792cce9d02724f6de863c03a360695e6394f845"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_head_specular.tga",
+      "file": "m107_head_specular.tga",
+      "bytes": 12582956,
+      "sha256": "c898d782606abd15523e1139245b2604c8565d372d0c1453ff52eef57989b6ed"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_helmet_color.tga",
+      "file": "m107_helmet_color.tga",
+      "bytes": 6291500,
+      "sha256": "5177905cdddefd5fe0729b0b7d3b8bf187b5d7c1d278bbf83c130070148436c0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_helmet_normal.tga",
+      "file": "m107_helmet_normal.tga",
+      "bytes": 6291500,
+      "sha256": "0e9b4e8f07834e13b3b0ff8c19ce963af9efe9438e51a298238784cb18d0b83f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/Assets/Avatars/Professions/Construction_Male_07/Textures/m107_helmet_specular.tga",
+      "file": "m107_helmet_specular.tga",
+      "bytes": 6291500,
+      "sha256": "6f095412410905caffe84a053c956249effe2ed3dd986033fa70b64e6a8a24dc"
+    }
+  ]
+}

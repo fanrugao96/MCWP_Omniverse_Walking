@@ -1,0 +1,28 @@
+#usda 1.0
+(
+    defaultPrim = "M2_Dark_Steel"
+    upAxis = "Z"
+)
+
+def Material "M2_Dark_Steel" (
+    assetInfo = {
+        asset identifier = @./M2_Dark_Steel.usda@
+        string name = "M2_Dark_Steel"
+    }
+)
+{
+    token outputs:surface.connect = </M2_Dark_Steel/SurfaceShader.outputs:surface>
+
+    def Shader "SurfaceShader"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:ambientOcclusion = 1
+        float inputs:anisotropy = 0
+        color3f inputs:diffuseColor = (0.054480277, 0.06847817, 0.074213564)
+        float inputs:metallic = 0
+        float inputs:roughness = 0.49803925
+        float inputs:specular = 0.49803925
+        token outputs:surface
+    }
+}
+

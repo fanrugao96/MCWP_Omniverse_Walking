@@ -1,0 +1,28 @@
+#usda 1.0
+(
+    defaultPrim = "M2_Red_Access_Panels"
+    upAxis = "Z"
+)
+
+def Material "M2_Red_Access_Panels" (
+    assetInfo = {
+        asset identifier = @./M2_Red_Access_Panels.usda@
+        string name = "M2_Red_Access_Panels"
+    }
+)
+{
+    token outputs:surface.connect = </M2_Red_Access_Panels/SurfaceShader.outputs:surface>
+
+    def Shader "SurfaceShader"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:ambientOcclusion = 1
+        float inputs:anisotropy = 0
+        color3f inputs:diffuseColor = (0.5394795, 0.02842604, 0.022173885)
+        float inputs:metallic = 0
+        float inputs:roughness = 0.49803925
+        float inputs:specular = 0.49803925
+        token outputs:surface
+    }
+}
+

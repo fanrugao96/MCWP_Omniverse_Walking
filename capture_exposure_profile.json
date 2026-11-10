@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "1920x1080_focal_31.1769": {
+      "f_stop": 5.0,
+      "iso": 100.0,
+      "exposure_time": 0.02
+    },
+    "1280x720_focal_18.0000": {
+      "f_stop": 5.0,
+      "iso": 100,
+      "exposure_time": 0.02
+    },
+    "1437x720_focal_31.1769": {
+      "f_stop": 1.4,
+      "iso": 400.0,
+      "exposure_time": 0.1
+    }
+  }
+}

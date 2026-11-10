@@ -1,0 +1,55 @@
+#usda 1.0
+(
+    defaultPrim = "m107_helmet"
+    upAxis = "Z"
+)
+
+def Material "m107_helmet" (
+    assetInfo = {
+        asset identifier = @./m107_helmet.usda@
+        string name = "m107_helmet"
+    }
+)
+{
+    token inputs:stPrimvarName = "st"
+    token outputs:surface.connect = </m107_helmet/SurfaceShader.outputs:surface>
+
+    def Shader "SurfaceShader"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:ambientOcclusion = 1
+        float inputs:anisotropy = 0
+        color3f inputs:diffuseColor.connect = </m107_helmet/diffuseTexture.outputs:rgb>
+        float inputs:metallic = 0
+        normal3f inputs:normal.connect = </m107_helmet/normalTexture.outputs:rgb>
+        float inputs:roughness = 0.49803925
+        float inputs:specular = 0.49803925
+        token outputs:surface
+    }
+
+    def Shader "PrimvarReader"
+    {
+        uniform token info:id = "UsdPrimvarReader_float2"
+        string inputs:varname.connect = </m107_helmet.inputs:stPrimvarName>
+        token outputs:result
+    }
+
+    def Shader "diffuseTexture"
+    {
+        uniform token info:id = "UsdUVTexture"
+        float4 inputs:fallback = (0, 0, 0, 1)
+        asset inputs:file = @Textures/T_m107_helmet_BaseColor.png@
+        float2 inputs:st.connect = </m107_helmet/PrimvarReader.outputs:result>
+        color3f outputs:rgb
+    }
+
+    def Shader "normalTexture"
+    {
+        uniform token info:id = "UsdUVTexture"
+        float4 inputs:fallback = (0, 1, 0, 1)
+        asset inputs:file = @Textures/T_m107_helmet_Normal.png@
+        float2 inputs:st.connect = </m107_helmet/PrimvarReader.outputs:result>
+        normal3f outputs:rgb
+    }
+}
+

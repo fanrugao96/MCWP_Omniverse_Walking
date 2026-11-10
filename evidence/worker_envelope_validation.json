@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "Native skin evaluated on the continuous full-platform route and pose transitions; component obstacle boxes, actual deck panel support, full-height swept fixed masts. Not an exhaustive proof of every possible animation state.",
+  "sampled_states": 10332,
+  "native_geometry_samples": 1722,
+  "collision_samples": 0,
+  "unsupported_samples": 0
+}

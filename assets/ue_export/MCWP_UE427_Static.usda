@@ -1,0 +1,190 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    endTimeCode = 0
+    metersPerUnit = 0.009999999776482582
+    startTimeCode = 0
+    upAxis = "Z"
+)
+
+def Xform "Root"
+{
+    def Mesh "MCWP_Worker" (
+        prepend references = @Assets/Game/Objects/Worker/meshes/Construction_Worker.usda@
+    )
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (50, -0, 121.25, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "Floor" (
+        prepend references = @Assets/Game/StarterContent/Architecture/Floor_400x400.usda@
+    )
+    {
+        rel material:binding = </Root/Materials/Shell007_002_002_001>
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (10, -0, 0, 0), (0, 10, -0, 0), (0, 0, 1, 0), (-1970, 2000, 0, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "Models"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (-4.054450035095215, 3.004459857940674, 1.399999976158142, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Xform "MyPawn2"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (-0.9999995231628418, 2.3841855067985307e-7, 0, 0), (-2.3841855067985307e-7, -0.9999995231628418, 0, 0), (0, -0, 1, 0), (0, -0, 50, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Xform "Head"
+        {
+            token visibility = "inherited"
+        }
+
+        def Xform "LeftContoller"
+        {
+            token visibility = "inherited"
+
+            def Mesh "raygun"
+            {
+                token visibility = "inherited"
+
+                def Mesh "LeftCone" (
+                    prepend references = @Assets/Engine/BasicShapes/Cone.usda@
+                )
+                {
+                    rel material:binding = </Root/Materials/BasicShapeMaterial>
+                    token visibility = "inherited"
+                    matrix4d xformOp:transform = ( (5.9604645663569045e-9, -2.842170985392048e-15, -0.10000000149011612, 0), (4.768372718899627e-8, 0.10000000149011612, 2.842170985392048e-15, 0), (0.10000000149011612, -4.768372718899627e-8, 5.9604645663569045e-9, 0), (0, -0, 0, 1) )
+                    uniform token[] xformOpOrder = ["xformOp:transform"]
+                }
+            }
+        }
+
+        def Xform "RightController"
+        {
+            token visibility = "inherited"
+
+            def Mesh "RightMesh" (
+                prepend references = @Assets/Engine/BasicShapes/Cone.usda@
+            )
+            {
+                rel material:binding = </Root/Materials/BasicShapeMaterial>
+                token visibility = "inherited"
+                matrix4d xformOp:transform = ( (5.9604645663569045e-9, -2.842170985392048e-15, -0.10000000149011612, 0), (4.768372718899627e-8, 0.10000000149011612, 2.842170985392048e-15, 0), (0.10000000149011612, -4.768372718899627e-8, 5.9604645663569045e-9, 0), (0, -0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Xform "LeftMotionController"
+        {
+            token visibility = "inherited"
+        }
+
+        def Xform "RightMotionController"
+        {
+            token visibility = "inherited"
+        }
+    }
+
+    def DomeLight "SkyLight"
+    {
+        color3f inputs:color = (1, 1, 1)
+        float inputs:exposure = 0
+        float inputs:intensity = 1
+        asset inputs:texture:file
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (20.77435302734375, 30.995269775390625, 504.74822998046875, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def DistantLight "Light_Source"
+    {
+        float inputs:angle = 0.5357
+        color3f inputs:color = (1, 1, 1)
+        float inputs:colorTemperature = 6500
+        bool inputs:enableColorTemperature = 0
+        float inputs:exposure = 0
+        float inputs:intensity = 3.141593
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (-0.11200785636901855, -1.8608410358428955, 1.6657495498657227, 0), (1.8123947381973267, 1.086667537689209, 1.3358057737350464, 0), (-1.7183351516723633, 1.2674473524093628, 1.3003458976745605, 0), (30, 90, 570, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "apple"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (-1360, -1290, 1040, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "floor2"
+    {
+        token visibility = "inherited"
+    }
+
+    def Xform "Caster"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (0.9063077569007874, 0, 0.4226182699203491, 0), (0, 1, 0, 0), (-0.4226182699203491, 0, 0.9063077569007874, 0), (200, -12.5, 150, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Xform "CameraComponent"
+        {
+            token visibility = "inherited"
+            matrix4d xformOp:transform = ( (-0.9999995231628418, 2.3841855067985307e-7, 0, 0), (-2.3841855067985307e-7, -0.9999995231628418, 0, 0), (0, -0, 1, 0), (-60.488494873046875, 40.011940002441406, 20, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Mesh "Table2"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (100, 460, 0, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "Models2"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (5.5092620849609375, 0.8803138732910156, 1.3989499807357788, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "Table"
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (-3.590329885482788, 80.00753784179688, 0.0003420000139158219, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Mesh "MCWP_Platform" (
+        prepend references = @Assets/Game/Objects/Platform/meshes/Platform.usda@
+    )
+    {
+        token visibility = "inherited"
+        matrix4d xformOp:transform = ( (1, -0, 0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (50, -0, 120.9000015258789, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Scope "Materials"
+    {
+        def Material "Shell007_002_002_001" (
+            prepend references = @Assets/Game/RobotDescription/meshes/visual/Shell007_002_002_001.usda@
+        )
+        {
+        }
+
+        def Material "BasicShapeMaterial" (
+            prepend references = @Assets/Engine/BasicShapes/BasicShapeMaterial.usda@
+        )
+        {
+        }
+    }
+}
+

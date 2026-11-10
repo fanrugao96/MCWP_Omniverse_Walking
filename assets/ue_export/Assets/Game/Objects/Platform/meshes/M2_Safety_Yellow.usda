@@ -1,0 +1,28 @@
+#usda 1.0
+(
+    defaultPrim = "M2_Safety_Yellow"
+    upAxis = "Z"
+)
+
+def Material "M2_Safety_Yellow" (
+    assetInfo = {
+        asset identifier = @./M2_Safety_Yellow.usda@
+        string name = "M2_Safety_Yellow"
+    }
+)
+{
+    token outputs:surface.connect = </M2_Safety_Yellow/SurfaceShader.outputs:surface>
+
+    def Shader "SurfaceShader"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:ambientOcclusion = 1
+        float inputs:anisotropy = 0
+        color3f inputs:diffuseColor = (0.9473065, 0.50888133, 0.006048833)
+        float inputs:metallic = 0
+        float inputs:roughness = 0.49803925
+        float inputs:specular = 0.49803925
+        token outputs:surface
+    }
+}
+

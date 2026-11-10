@@ -1,0 +1,11 @@
+{
+  "parent_frame_id": null,
+  "optical_frame_id": null,
+  "parent_prim_path": null,
+  "camera_prim_path": "/Simulation/Camera",
+  "depth_topic": "camera/image2",
+  "encoding": "16UC1",
+  "depth_contract": "corrected ROS depth: optical Z in mm, little endian, zero invalid; explicitly differs from buggy original bytes",
+  "timestamp_contract": "UTC acquisition request time while scene is frozen; explicitly differs from source stamp 0",
+  "note": "The source does not define TF frame IDs or a camera pose. Supply the actual parent/optical frame mapping and corresponding USD parent prim before real TF publication. No arbitrary map/base/camera frame names are generated."
+}

@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 146,
+      "sha256": "1c3a6b60c7eece8dd216d4696013af6a66bfacbafd6861259bacc23d6328819c"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 471,
+      "sha256": "5888beecbbea00d029373ae5bfa358e5c479386198f2d76ddd92d97727010469"
+    },
+    {
+      "path": "Launch_MCWP.cmd",
+      "bytes": 941,
+      "sha256": "6243c7d71b778e8f91085355ea6cef6eee678d65900c1f0997199c59385fb82c"
+    },
+    {
+      "path": "MCWP_Simulation.usda",
+      "bytes": 109684,
+      "sha256": "7fd5301e01e95fbb2ace299f71b414344077e1a8c8ffb221992313688c9e40e5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6982,
+      "sha256": "c7e745a579bda3950d097bd539042f2d0e3ec2342fe715fa15276a9d77fa59e7"
+    },
+    {
+      "path": "Start MCWP Walking.cmd",
+      "bytes": 65,
+      "sha256": "d2f0106333f95583d68454fb87862f96c45bb36b9038ad57e4305e8b50575acb"
+    },
+    {
+      "path": "apps/mcwp.walking.kit",
+      "bytes": 4461,
+      "sha256": "e7fdfecac01be354d00944373cb9f6d8fbea94eb952a4ce87b6dd463c2888f44"
+    },
+    {
+      "path": "assets/UE_RightHand_original.csv",
+      "bytes": 93836,
+      "sha256": "c4c92fed2a183bc957c152ee027fcc3d619168b12280ea3c80f79c972566270a"
+    },
+    {
+      "path": "assets/lift/Platform_Lift.usda",
+      "bytes": 11737698,
+      "sha256": "d4000293bbcc8bb604c96e23e5aaf154b319731da4f3439e4987fff836b4ad29"
+    },
+    {
+      "path": "assets/lift/lift_geometry_validation.json",
+      "bytes": 296671,
+      "sha256": "f288da3d99e0cac9508be219331fa1442482522247528bd39ba193b03461e620"
+    },
+    {
+      "path": "assets/ue_export/Assets/Engine/BasicShapes/BasicShapeMaterial.usda",
+      "bytes": 696,
+      "sha256": "ea800acc0eb234c89ea119d9d2c6d857cdf059d80027ed89649219c3845d8086"
+    },
+    {
+      "path": "assets/ue_export/Assets/Engine/BasicShapes/Cone.usda",
+      "bytes": 27124,
+      "sha256": "80e974685af6470fcd0173409fb023eb10b69df97bb688e8dea7e213c4bbaf93"
+    },
+    {
+      "path": "assets/ue_export/Assets/Engine/EngineMaterials/DefaultMaterial.usda",
+      "bytes": 2065,
+      "sha256": "dc1c097534b539cdfd3f30eb8972356a55b3a6d1a74699da84225343d897f626"
+    },
+    {
+      "path": "assets/ue_export/Assets/Engine/EngineMaterials/Textures/T_DefaultMaterial_BaseColor.png",
+      "bytes": 165468,
+      "sha256": "9a93f691c10f8a82c3b174b79e67942b516582d2b0ec40db1559d97c8c47f200"
+    },
+    {
+      "path": "assets/ue_export/Assets/Engine/EngineMaterials/Textures/T_DefaultMaterial_Normal.png",
+      "bytes": 17560,
+      "sha256": "d41edd3ffe0c7bdeb83d519dbb91fc9fd9c3d2501cb2b4b65bc718e6240a478d"
+    },
+    {
+      "path": "assets/ue_export/Assets/Engine/EngineMaterials/Textures/T_DefaultMaterial_Roughness.png",
+      "bytes": 9310,
+      "sha256": "cf0fb575fc008d5082730b40bd57ac3f2e13f9448f7060c369efa42cee92de88"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Dark_Steel.usda",
+      "bytes": 701,
+      "sha256": "ba8eeb83ade1e5e43bd5069421cb326fe30f0006594a670d8d169b273867ea99"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Galvanized_Steel.usda",
+      "bytes": 729,
+      "sha256": "4046cdf29dbc12715bc32627ca6e379ce90ae4dd319ae22c408e8425e64d60f5"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Green_Deck_Plate.usda",
+      "bytes": 732,
+      "sha256": "a7edd9f4ba8e6b31e8d79b772478c07af315500cd43bea27caaf134dd8c558a1"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Green_Edge_Dark.usda",
+      "bytes": 727,
+      "sha256": "2c3caab649a1fad854e76600c70a2d90f46725ee141c4eb634b425c7cebaa5ed"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Painted_Industrial_Green.usda",
+      "bytes": 773,
+      "sha256": "9cad92287001442eb296dfe094738f55fb451a969d26cb4d39d8ecbafaa4fe47"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Red_Access_Panels.usda",
+      "bytes": 734,
+      "sha256": "80ff37a5595b5b9f508497de2d717cfc1c7eba45846e8b0f7e5531a7acb0cd9c"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Rubber_And_Recess.usda",
+      "bytes": 736,
+      "sha256": "2d0a08197a358eda5fd921d55f3c62c2e93cd66e252aee6c183ecb59bfcf031a"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/M2_Safety_Yellow.usda",
+      "bytes": 714,
+      "sha256": "f9afae071eb3f6947c0cc861567082e792245be5e0d139d42382723eed47e2a4"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Platform/meshes/Platform.usda",
+      "bytes": 12016389,
+      "sha256": "1c45d930aaf41e1958d19bb34780139174dddf4a119bb412fd5f2bc2a759d64a"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Construction_Worker.usda",
+      "bytes": 829985,
+      "sha256": "e122dfff9f6e5237f8d9b52559ac76a2e937aef37bbda432d7f370509c174d98"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Textures/T_m107_body_BaseColor.png",
+      "bytes": 235643,
+      "sha256": "5241868b1f22c8d11a0981da280c6e5764ad43902d60a242e312b1bec31b26ca"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Textures/T_m107_body_Normal.png",
+      "bytes": 392966,
+      "sha256": "307874d88290fe8fe7d8c86121b03e99f89f551169530f39065b8325393aed37"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Textures/T_m107_head_BaseColor.png",
+      "bytes": 237627,
+      "sha256": "b091e58fc75325dd603425eacd0b4da6baa4d43d19691f3af4107d9e0288453c"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Textures/T_m107_head_Normal.png",
+      "bytes": 328461,
+      "sha256": "f8d5f3a14edcd21f24363ffa7822844d8bcd56f53fc5ca8b77f0bd68d1f52e65"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Textures/T_m107_helmet_BaseColor.png",
+      "bytes": 164109,
+      "sha256": "e5364240b516af8a078bf1d7d6e3d44d741fb59a7aceb56ca43da8b9819f9011"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/Textures/T_m107_helmet_Normal.png",
+      "bytes": 151954,
+      "sha256": "7a3bc5940e0b4920a689ef05e86784a2f370011ebcea0b5248aa32de30a8ceb1"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/m107_body.usda",
+      "bytes": 1626,
+      "sha256": "bd0f39aa2218ec2c069ad1ceb118d5418a2614dbfc286c6440de0fa0d1094f3f"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/m107_head.usda",
+      "bytes": 1626,
+      "sha256": "84aa61d5d4bfea2d5cd69af96a36f3f974f4999f9fa60ecc489a8397880553b5"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/Objects/Worker/meshes/m107_helmet.usda",
+      "bytes": 1650,
+      "sha256": "20cdc7aa9e59229ace8a4acb5d568afbefd6a8e1cb0cf987734711f3425661cf"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/RobotDescription/meshes/visual/Shell007_002_002_001.usda",
+      "bytes": 734,
+      "sha256": "e8a5189e6b1cd5985baf923843c0fab334613d8a9643b0d4f6f02030d798da0c"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/StarterContent/Architecture/Floor_400x400.usda",
+      "bytes": 3055,
+      "sha256": "5d3e36dc41c4a58381d07e3643fca6c9a219feb85e4987bc8b4f5ce0ce85b8a4"
+    },
+    {
+      "path": "assets/ue_export/Assets/Game/StarterContent/Materials/M_Basic_Floor.usda",
+      "bytes": 708,
+      "sha256": "d1d98c6198ba0a8bfdf1906ee4c3eabfd355cd7abf16cb1c295e494de6bd9fdd"
+    },
+    {
+      "path": "assets/ue_export/MCWP_Omniverse_Demo.usda",
+      "bytes": 6422,
+      "sha256": "ed0d5bf496891ddeb4a8ecc1d73716334ba33d6089eeb6c7aee905ddb49f7375"
+    },
+    {
+      "path": "assets/ue_export/MCWP_UE427_Static.usda",
+      "bytes": 7019,
+      "sha256": "8fc0ee2b9246d21e311651868c2b3086c4078a24e181a1d7f003f67e96ae23e4"
+    },
+    {
+      "path": "assets/worker/Construction_Worker_RestPose.usdc",
+      "bytes": 612521,
+      "sha256": "b0e6d5cff23570aa7168b41c1b87aca5d122ab847be3042d58ff7e69b32d60d7"
+    },
+    {
+      "path": "assets/worker/Construction_Worker_Rigged.usdc",
+      "bytes": 612067,
+      "sha256": "5f95b74fd41e3573b3fafa3828b8cc69aa77b43a6d34e7be2751fcbbdd97ef6b"
+    },
+    {
+      "path": "assets/worker/LICENSE_Rocketbox_MIT.txt",
+      "bytes": 1066,
+      "sha256": "17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352"
+    },
+    {
+      "path": "assets/worker/SHA256_Manifest.json",
+      "bytes": 1641,
+      "sha256": "1c93ce8ae662b176b2e11a4c53c1bcba7e17babdbe70dfa571c5b484018f7a42"
+    },
+    {
+      "path": "assets/worker/Source_Provenance.json",
+      "bytes": 3862,
+      "sha256": "86f3edca78e46acfda937f69da066a7635f0f50eb2cac44092159b6ce4339782"
+    },
+    {
+      "path": "assets/worker/textures/m107_body_color.png",
+      "bytes": 5909975,
+      "sha256": "bdf58e734450f7d4768c0035c38af2c882587e25c1cb9710872b66a5b82ce968"
+    },
+    {
+      "path": "assets/worker/textures/m107_body_normal_OpenGL.png",
+      "bytes": 4592153,
+      "sha256": "9524523bf83e094302d31545038c0e7a730dd3c6f215be43926893055bc3edff"
+    },
+    {
+      "path": "assets/worker/textures/m107_head_color.png",
+      "bytes": 4446260,
+      "sha256": "0272666e95ca6b338e9206eb4b318439a8af41d8e0047d017807d7d458c4a10a"
+    },
+    {
+      "path": "assets/worker/textures/m107_head_normal_OpenGL.png",
+      "bytes": 4261251,
+      "sha256": "8d92edb32533afa034eec73ac0c4f47f7a01f3afa5878d2eb9ff8f22d7d9f490"
+    },
+    {
+      "path": "assets/worker/textures/m107_helmet_color.png",
+      "bytes": 1111367,
+      "sha256": "d5c7c2c4cea1b5e983bc2701d819f09267913bc2728e5f84b679ed853a0d667b"
+    },
+    {
+      "path": "assets/worker/textures/m107_helmet_normal_OpenGL.png",
+      "bytes": 623843,
+      "sha256": "9d6cafd5b3a2c79fc700b854f19993cf78d0be0dd01cc56c098463a9208c7ebd"
+    },
+    {
+      "path": "assets/worker/walk_navigation.json",
+      "bytes": 80286,
+      "sha256": "6907e0badcb516e3d2971c643a01ba90ab703126e3f7b489bba1c44239587d9e"
+    },
+    {
+      "path": "capture_exposure_profile.json",
+      "bytes": 362,
+      "sha256": "095196e92bdacbe49e1d8073a650831698d13bcabe0ec52bb955b5b5b7068c52"
+    },
+    {
+      "path": "depth_tf_config.json",
+      "bytes": 676,
+      "sha256": "68e8b74028fceee2b5a6304bf5df824984064fdde7bd81c95330da2c1f739af9"
+    },
+    {
+      "path": "evidence/worker_envelope_validation.json",
+      "bytes": 382,
+      "sha256": "23cb17c24499f4c728c5fb43c39d71f21ffe65c16c029ca31dbfe7be1b6806d1"
+    },
+    {
+      "path": "recordings/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 191,
+      "sha256": "5d567bf9054ffcc929fbe8967494c6deda33610daa40da3e28672e1a4dd20c84"
+    },
+    {
+      "path": "ros_config.json",
+      "bytes": 238,
+      "sha256": "e4f6637fe460a9db60d7ee72187a283d51ef61b1d860e7afc962f75c73180f89"
+    },
+    {
+      "path": "runtime_control.json",
+      "bytes": 19,
+      "sha256": "10bd3b5301739aabbcec1ff9280a8fe392a93ae3673571434754d23053130057"
+    },
+    {
+      "path": "scripts/delivery_files.py",
+      "bytes": 4043,
+      "sha256": "dd43ba0c6800d477da21d175b28775d1458ccc4ff62600978425f20808514bc4"
+    },
+    {
+      "path": "scripts/mcwp_control_menu.py",
+      "bytes": 1994,
+      "sha256": "b5ac962380e41691fbb2b56a6ca2919ac1795500cc86c24d0a973d1cff76ebf0"
+    },
+    {
+      "path": "scripts/mcwp_depth_tf.py",
+      "bytes": 16260,
+      "sha256": "003f107de34a615efb7fef218697ce334de7f5f3b0f57399c5dded06f225d4bf"
+    },
+    {
+      "path": "scripts/mcwp_extension_features.py",
+      "bytes": 8731,
+      "sha256": "49b897817aa652841a7489faa6998f21e9c6b6db602b87c334a809efcc375c2c"
+    },
+    {
+      "path": "scripts/mcwp_interfaces.py",
+      "bytes": 5289,
+      "sha256": "a9cf65134f36659243b265fd2d4d29b96342a7c12bd7b5a6c7157f2446e5393e"
+    },
+    {
+      "path": "scripts/mcwp_lift.py",
+      "bytes": 12855,
+      "sha256": "5eeb6c768e895f85480f790321669ec3dfe0c4a44e1d7df9046118ca4bac35ee"
+    },
+    {
+      "path": "scripts/mcwp_ros_depth_contract.py",
+      "bytes": 4209,
+      "sha256": "7af1931e11f4ac72bb8bec6ffa95eb6e4d7ba2d402bda2a22351eee1c6456ccc"
+    },
+    {
+      "path": "scripts/mcwp_simulation.py",
+      "bytes": 37975,
+      "sha256": "ac462628e1ec5051ca46ab8cea25899f7973e4e3973d4f729f053484eccec8fe"
+    },
+    {
+      "path": "scripts/mcwp_worker.py",
+      "bytes": 8477,
+      "sha256": "35317c7af231311744307cd54be1a7595a9ef7409d314ce0e54f406c81e3232a"
+    },
+    {
+      "path": "scripts/package_delivery.py",
+      "bytes": 1662,
+      "sha256": "c8c52fc1f836c87e562409126e4043cb288bfeebd73a3069b36f5c88996c69d2"
+    },
+    {
+      "path": "scripts/verify_delivery.py",
+      "bytes": 2144,
+      "sha256": "587430e95cfbce31625c64fb6c3dd51a3d295f948a1d19d3a689ac7b99a0efed"
+    },
+    {
+      "path": "scripts/worker_full_validation.py",
+      "bytes": 16793,
+      "sha256": "7118c994ef52046d9e99bb95f1e45d8d4867887030515dc55d0fdfaf52e677fc"
+    },
+    {
+      "path": "scripts/worker_motion.py",
+      "bytes": 11508,
+      "sha256": "84fb1c60f9b6f5f8786f23a2acc60ff4b34a152b1d9a834930740c8f0ff6d82a"
+    },
+    {
+      "path": "scripts/worker_navigation.py",
+      "bytes": 7506,
+      "sha256": "296bb61b59155c685399fe8578dd0287d273a58ce267dc8b75ad8e925f4edbb9"
+    },
+    {
+      "path": "scripts/worker_validation.py",
+      "bytes": 3569,
+      "sha256": "7bffa8e325955e1342874b551d7d54676f1d1795ac565f3351b64a43cf671acb"
+    }
+  ]
+}

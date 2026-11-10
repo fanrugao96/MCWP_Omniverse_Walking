@@ -1,0 +1,145 @@
+# MCWP application definition for the existing Kit 110.4 runtime.
+# Launch_MCWP.cmd supplies the installed extension search folders.
+[package]
+title = "MCWP Walking"
+version = "0.1.0"
+description = "Desktop MCWP lift and worker controls."
+keywords = ["app"]
+
+[dependencies]
+"omni.activity.profiler" = {}
+"omni.activity.pump" = {}
+"omni.anim.curve.core" = {}
+"omni.graph.action" = {}
+"omni.graph.core" = {}
+"omni.graph.nodes" = {}
+"omni.graph.scriptnode" = {}
+"omni.graph.ui_nodes" = {}
+"omni.hydra.engine.stats" = {}
+"omni.hydra.rtx" = {}
+"omni.hydra.usdrt_delegate" = {}
+"omni.kit.developer.bundle" = {}
+"omni.kit.mainwindow" = {}
+"omni.kit.manipulator.camera" = {}
+"omni.kit.manipulator.prim" = {}
+"omni.kit.manipulator.selection" = {}
+"omni.kit.material.library" = {}
+"omni.kit.menu.common" = {order = 1000}
+"omni.kit.menu.create" = {}
+"omni.kit.menu.edit" = {}
+"omni.kit.menu.file" = {}
+"omni.kit.primitive.mesh" = {}
+"omni.kit.property.bundle" = {}
+"omni.kit.raycast.query" = {}
+"omni.kit.stage_template.core" = {}
+"omni.kit.telemetry" = {}
+"omni.kit.tool.asset_importer" = {}
+"omni.kit.tool.collect" = {}
+"omni.kit.viewport.legacy_gizmos" = {}
+"omni.kit.viewport.menubar.camera" = {}
+"omni.kit.viewport.menubar.display" = {}
+"omni.kit.viewport.menubar.lighting" = {}
+"omni.kit.viewport.menubar.render" = {}
+"omni.kit.viewport.menubar.settings" = {}
+"omni.kit.viewport.ready" = {}
+"omni.kit.viewport.scene_camera_model" = {}
+"omni.kit.viewport.window" = {}
+"omni.kit.widget.cache_indicator" = {}
+"omni.kit.window.console" = {}
+"omni.kit.window.content_browser" = {}
+"omni.kit.window.property" = {}
+"omni.kit.window.stage" = {}
+"omni.kit.window.status_bar" = {}
+"omni.kit.window.toolbar" = {}
+"omni.physx.stageupdate" = {}
+"omni.rtx.settings.core" = {}
+"omni.uiaudio" = {}
+"omni.usd.metrics.assembler.ui" = {}
+"omni.usd.schema.metrics.assembler" = {}
+"omni.warp.core" = {}
+
+[settings]
+
+[settings.persistent]
+
+[settings.persistent.app]
+
+[settings.persistent.app.viewport]
+
+[settings.persistent.app.viewport.autoFrame]
+mode = "first_open"
+
+[settings.crashreporter]
+compressDumpFiles = true
+
+[settings.exts]
+
+[settings.exts."omni.kit.material.library"]
+ui_show_list = ["OpenPBR Base", "OpenPBR", "OmniGlass", "OmniSurface", "USD Preview Surface", "Add MDL*", "Add MaterialX*"]
+
+[settings.exts."omni.rtx.window.settings"]
+window_menu = "Window"
+
+[settings.exts."omni.kit.viewport.menubar.lighting"]
+defaultRigIgnorePattern = ""
+
+[settings.exts."omni.kit.viewport.window"]
+
+[settings.exts."omni.kit.viewport.window".windowMenu]
+entryCount = 1
+label = ""
+
+[settings.renderer]
+asyncInit = true
+
+[settings.renderer.gpuEnumeration]
+
+[settings.renderer.gpuEnumeration.glInterop]
+enabled = false
+
+[settings.rtx]
+
+[settings.rtx.ecoMode]
+enabled = true
+
+[settings.rtx.hydra]
+mdlMaterialWarmup = true
+
+[settings.telemetry]
+disableInternalSessionCheck = true
+enableAnonymousAppName = true
+enableAnonymousData = true
+
+[settings.privacy]
+externalBuild = true
+
+[settings.app]
+
+[settings.app.content]
+emptyStageOnStart = true
+
+[settings.app.font]
+file = "${fonts}/OpenSans-SemiBold.ttf"
+size = 16
+
+[settings.app.hangDetector]
+enabled = true
+timeout = 120
+
+[settings.app.renderer]
+skipWhileMinimized = true
+
+[settings.app.window]
+title = "Kit Base Editor 110.4"
+
+[settings.app.environment]
+name = "Kit Base Editor 110.4"
+
+[settings.app.viewport]
+
+[settings.app.viewport.defaults]
+fillViewport = true
+
+[settings.app.exts]
+enabled = ["omni.anim.curve.core-1.6.1", "omni.convexdecomposition-110.4.1", "omni.graph.action-2.10.2", "omni.graph.action_nodes-2.11.0", "omni.graph.action_nodes_core-2.11.0", "omni.graph.nodes-2.12.1", "omni.graph.nodes_core-2.11.0", "omni.graph.scriptnode-2.10.2", "omni.graph.ui_nodes-2.11.2", "omni.kit.asset_converter-6.1.3", "omni.kit.debug.settings-1.0.3", "omni.kit.dev.utilities.bundle-0.2.1", "omni.kit.developer.bundle-0.2.0", "omni.kit.tool.asset_importer-6.0.5", "omni.kit.viewport.menubar.lighting-107.3.4", "omni.physx-110.4.1", "omni.physx.cooking-110.4.1", "omni.physx.foundation-110.4.1", "omni.physx.gpu-110.4.1", "omni.physx.stageupdate-110.4.1", "omni.usd.metrics.assembler-110.1.2", "omni.usd.metrics.assembler.ui-110.1.3", "omni.usd.schema.metrics.assembler-110.1.1", "omni.usd.schema.newton-1.4.0", "omni.usd.schema.physx-110.4.1", "omni.usdphysics-110.4.1", "omni.warp.core-1.17.0"]
+

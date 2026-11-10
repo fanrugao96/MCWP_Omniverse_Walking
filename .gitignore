@@ -1,0 +1,32 @@
+# Local dependency environments and application caches
+/.venv/
+/venv/
+/env/
+/cache/
+/data/
+/logs/
+/extscache/
+/extsbuild/
+__pycache__/
+*.py[cod]
+
+# Local packaging and recovery copies
+/dist/
+/build/
+/backups/
+*.lnk
+
+# Runtime recordings and diagnostics. The lift check reads this one reference.
+/recordings/*
+!/recordings/.gitkeep
+/evidence/*
+!/evidence/worker_envelope_validation.json
+
+# Editor and OS state
+/.vscode/
+/.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+.env
+.env.*

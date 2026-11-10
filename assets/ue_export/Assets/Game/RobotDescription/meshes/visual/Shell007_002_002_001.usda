@@ -1,0 +1,28 @@
+#usda 1.0
+(
+    defaultPrim = "Shell007_002_002_001"
+    upAxis = "Z"
+)
+
+def Material "Shell007_002_002_001" (
+    assetInfo = {
+        asset identifier = @./Shell007_002_002_001.usda@
+        string name = "Shell007_002_002_001"
+    }
+)
+{
+    token outputs:surface.connect = </Shell007_002_002_001/SurfaceShader.outputs:surface>
+
+    def Shader "SurfaceShader"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:ambientOcclusion = 1
+        float inputs:anisotropy = 0
+        color3f inputs:diffuseColor = (0.25015828, 0.25015828, 0.25015828)
+        float inputs:metallic = 0
+        float inputs:roughness = 0.49803925
+        float inputs:specular = 0.49803925
+        token outputs:surface
+    }
+}
+
